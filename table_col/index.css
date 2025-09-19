@@ -2,3 +2,23 @@ table, thead, tbody, tr, td, th{
     border: 1px solid black ;
     border-collapse: collapse;
 }
+
+thead{
+    background-color: aqua;
+}
+
+tbody > tr{
+    background-color: brown; /*   kombinátor >, +, ~,    */
+}
+
+tbody tr:nth-child(2n){
+    background-color: rgb(90, 88, 88);
+}
+
+tbody tr:hover{
+    background-color: forestgreen;  /*erősebb mint az előzőek*/
+}
+
+thead~tbody tr{
+    background-color: rgb(186, 186, 211);/*t body > tr fölé egy szabályt definiáljunk kombinátorral*/
+}

@@ -1,0 +1,18 @@
+/*property a dolg: border, border collapse, bg color, color, font styl, text-align, padding, font-weight (bold)*/
+
+table>*
+table + thead (table utáni első thead-re igaz)
+table - thead (table utáni összes thead-re igaz)
+table > thead
+table > tr
+
+ceudo osztály
+pl table:nth-child()
+:nth-child(xy.-child) vagy 2n 2n+1
+:hover
+tbody tr:hower
+
+t body > tr fölé egy szabályt definiáljunk kombinátorral:
+thead~tbody tr{
+    background-color: rgb(186, 186, 211);/* */
+}

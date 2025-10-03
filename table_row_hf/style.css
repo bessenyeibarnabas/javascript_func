@@ -1,0 +1,26 @@
+table, thead, tbody, tr, th, td{
+    border: dotted 1px orange;
+    border-collapse: collapse;
+}
+
+td:first-child{
+    background-color: aqua;
+}
+td:last-child{
+    background-color: aqua;
+}
+
+tr:has(td[colspan]):hover td{
+    background-color: blue;
+    font-size: 120%;
+    color: red;
+}
+tr:not(:has(td[colspan])):hover td{
+    background-color: red;
+    font-size: 80%;
+    color: blue;
+}
+
+td:first-child(2){
+    background-color: black;
+}

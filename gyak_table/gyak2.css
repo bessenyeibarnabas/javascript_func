@@ -1,0 +1,20 @@
+/*B*/
+tbody, td{
+    border: dotted;
+}
+table{
+    border-collapse: collapse;
+}
+
+tbody tr:nth-child(2n+1) {
+    background-color: lightblue;
+}
+
+#dolgozat > p.error {
+    color: red;
+}
+
+#dolgozat:has(a[href="cica.html"]:hover) > div {
+    background-color: red;
+}
+

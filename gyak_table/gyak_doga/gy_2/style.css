@@ -1,0 +1,16 @@
+table, thead, tbody, th, tr, td{
+    border: dotted;
+    border-collapse: collapse;
+}
+
+tr td:first-child{
+    background-color: aqua;
+}
+
+tr td:last-child{
+    background-color: aqua;
+}
+
+tr td:nth-child(2){
+    color: red;
+}

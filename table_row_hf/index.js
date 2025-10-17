@@ -65,7 +65,7 @@ for(const obj of arr){
     td3.innerText = obj.team1Size;
  
     if(obj.team2){
-        td1.colSpanSpan = "2";
+        td1.rowSpan = "2";
  
         const tr = document.createElement("tr");
         tbody.appendChild(tr);

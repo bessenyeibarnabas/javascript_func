@@ -8,6 +8,7 @@ tr td:nth-last-child(3), td:last-child{
     background-color: yellow;
 }
 
+
 input + .error{
     color: red;
 }

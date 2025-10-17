@@ -1,129 +1,130 @@
-/*
+// console.log("gomszab a kedvenc tanárom")
+// const a = "szia"
+// /**
+//  * @type{string}
+//  */
+// console.log(a)
 
-let a = "Hello" // lehet újra értéket adni
-const b ="Csao" // nem lehet újra értéket adni
-console.log(a,b)
+// const b = ["a","b","c"]
+// console.log(b)
+// for(let i=0;i<b.length;i++){
+//     console.log(b[i])
+// }
+// console.log(b[1])
+
+// /** 
+//  * while()
+//  * 
+//  * do
+//  * while()
+// */
+// for(const key in b){
+ 
+// }
+
+// for(const key in b){
+//     console.log(`${key}:${b[key]}$`)
+// }
+
+// /**@type{{name:string, age:number}} */
+
+// const y ={
+//     name:'bence',
+//     age:17
+// }
+
 /**
- * @type {string}
+ * @type {{author: string, era: string, lover1: string, lover2?: string}[]}
  */
-
-/*
-const c = ["aa","b","cc"] // tömb
-console.log(c) // tartalma
-
-for(let i=0;i<c.length;i++){ // szamlalo
-    console.log("index",i,"Érték",c[i])
-}
-
-for (let i in c){ // for in
-    console.log("index",i,"Érték",c[i])
-}
-
-for (let e of c){ // for of
-    console.log("Érték",e)
-}
-
-// push
-let hossz = c.push("d") //hozzáad "d"-t
-console.log(c)
-console.log(hossz)
-
-//obijektum
-const obj={
-    name: "Barnabás",
-    age: 18
-}
-for(let key in obj){
-    console.log(`${key}: ${obj[key]}`)
-}
-console.log(obj["age"]); //18
-
-//obijektum tömb
-const tomb=[
-    {name: "Valaki", age: 19},
-    {name: "Ember", age: 20},
-    {name: "Alma", age: 21}
+const arr = [
+    {
+        author: 'Balassi Bálint',
+        era: 'reformáció',
+        lover1: 'Losonczy Anna',
+        lover2: 'Dobó Krisztina'
+    },
+    {
+        author: 'Csokonai Vitéz Mihály',
+        era: 'felvilágosodás',
+        lover1: 'Vajda Juliána'
+    },
+    {
+        author: 'Petőfi Sándor',
+        era: 'magyar romantika',
+        lover1: 'Mednyánszky Berta',
+        lover2: 'Szendrey Júlia'
+    },
+    {
+        author: 'Ady Endre',
+        era: '20. század',
+        lover1: 'Léda',
+        lover2: 'Csinszka'
+    }
 ]
 
-for (let em of tomb){
-    console.log(em.name)
-}
-*/
-
-const arr =[
-    {
-        writer: "Balassi Bálint",
-        time: "reformáció",
-        lovers1: "Losonczy Anna",
-        lovers2: "Dobó Krisztina"
-    },
-    {
-        writer: "Csokonai Vitéz Mihály",
-        time: "felvilágosodás",
-        lovers1: "Vajda Juliána",
-    },
-    {
-        writer: "Petőfi Sándor",
-        time: "magyar romantika	",
-        lovers1: "Mednyánszky Berta",
-        lovers2: "Szendrey Júlia"
-    },
-    {
-        writer: "Ady Endre",
-        time: "20. század",
-        lovers1: "Léda",
-        lovers2: "Csinszka"
-    },
-
-
-]
 
 const table = document.createElement("table")
 document.body.appendChild(table)
 
+
 const thead = document.createElement("thead")
 table.appendChild(thead)
 
-const tr = document.createElement("tr")
-thead.appendChild(tr)
+const trHead = document.createElement("tr")
+thead.appendChild(trHead)
 
-const th = document.createElement("th")
-tr.appendChild(th)
+const th1 = document.createElement("th")
+trHead.appendChild(th1)
+th1.innerText = "Szerző neve"
 
 const th2 = document.createElement("th")
-tr.appendChild(th2)
+trHead.appendChild(th2)
+th2.innerText = "Korszak"
 
 const th3 = document.createElement("th")
-tr.appendChild(th3)
-
-th.innerText = "Szerző neve"
-th2.innerText = "Korszak"
+trHead.appendChild(th3)
 th3.innerText = "Szerelmek"
+th3.colSpan = 2
+
 
 const tbody = document.createElement("tbody")
 table.appendChild(tbody)
 
-for (const i of arr){
-    const row = document.createElement("tr");
-    tbody.appendChild(row);
 
-    const td1 = document.createElement("td");
-    td1.innerText = i.writer;
-    row.appendChild(td1);
+for (const elem of arr) {
+    const tr = document.createElement("tr")
+    tbody.appendChild(tr)
 
-    const td2 = document.createElement("td");
-    td2.innerText = i.time;
-    row.appendChild(td2);
+    const td1 = document.createElement("td")
+    tr.appendChild(td1)
+    td1.innerText = elem.author
 
-    const td3 = document.createElement("td");
-    td3.innerText = i.lovers1;
-    row.appendChild(td3);
+    const td2 = document.createElement("td")
+    tr.appendChild(td2)
+    td2.innerText = elem.era
 
-    if (i.lovers2 == undefined){
-        td3.colSpan=2;
-    } else{
+    if (typeof elem.lover2 === "undefined") {
+        const td3 = document.createElement("td")
+        tr.appendChild(td3)
+        td3.innerText = elem.lover1
+        td3.colSpan = 2
+    } else {
+        const td3 = document.createElement("td")
+        tr.appendChild(td3)
+        td3.innerText = elem.lover1
+
         const td4 = document.createElement("td")
-        td4.innerText = i.lovers2;
-        row.appendChild(td4)
+        tr.appendChild(td4)
+        td4.innerText = elem.lover2
     }
+}
+
+/**
+ * 
+ * @param {string} celltype //td vagy th mert válltozik
+ * @param {string} cellcontent -beállítjuk a cellcontent-et
+ * @param {HTMLTableRowElement} parento -hozzáfűzűnk egy sort
+ */
+function createcell(celltype,cellcontent,parento){
+    cella
 }

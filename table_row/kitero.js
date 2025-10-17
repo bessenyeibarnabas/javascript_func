@@ -1,3 +1,4 @@
+/*
 const a = {};
 const b = 6;
 
@@ -10,3 +11,4 @@ else{
 console.log(a.name);
 console.log(a["name"]);
 console.log(a.age);
+*/

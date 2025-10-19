@@ -1,19 +1,20 @@
 /*D*/
-tbody, td{
+tbody, td{ /*tbody & tr elemek köré pontozott zöld szegély*/
     border: dotted green
 }
 table{
-    border-collapse: collapse;
+    border-collapse: collapse; /*átlapozódás miatt*/
 }
 
-tbody tr:nth-last-child(2n+1){
+tbody tr:nth-last-child(2n+1){ /*páratlan szmú sor -> bgc: yellow*/
     background-color: yellow;
 }
 
-#dolgozat > .error{
+#dolgozat > .error{ /*id dolgozat div-nek a gyermeke: p.error osztállyal rendelkező p*/
     color: red
 }
 
-#dolgozat:has(a[href="cica.html"]:hover) label {
-  background-color: yellow;
+#dolgozat:has(a[href="cica.html"]:hover) label { /*id dolgozat diven belül van #href ="cica.html" id vel rendelkező elem és fölé visszük az egeret akkor a label bgc -> red */
+    background-color: red;
+
 }

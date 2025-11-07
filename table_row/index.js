@@ -1,5 +1,5 @@
 /**
- * @type {{nationality:string, name1:string, work1:string, name2?:string, work2?:string}}
+ * @type {{nationality:string, name1:string, work1:string, name2?:string, work2?:string}[]}
  */
 const arr = [
     {
@@ -85,34 +85,116 @@ for(const obj of arr){
         td5.innerText = obj.work2;
     }
 }
+ 
+ 
+//Form
+ 
 /**
- * @type{HTMLFormElement}
+ * @type {HTMLFormElement}
  */
-const form = document.getElementById("htmlform")
-form.addEventListener("submit",function(e){
-    e.preventDefault()
-    /**
-     * @type{HTMLFormElement}
-     */
-    const target = e.target;
-
-    const nemzet = target.querySelector("nemzetiseg")
-    const szerzo1 = target.querySelector("szerzo")
-    const mu1 = target.querySelector("mu1")
-    const szerzo2 = target.querySelector("szerzo2")
-    const mu2 = target.querySelector("mu2")
-
-    const nemzetvalue = nemzet.value
-    const szerzovalue = szerzo1.value
-    const mu1value = mu1.value
-    const szerzo2value = szerzo2.value
-    const mu2value = mu2.value
-
-    /**
-     * @type {{nationality:string, name1:string, work1:string, name2?:string, work2?:string}}
-     */
-    const obj = []
+const bicus = document.getElementById("htmlform");
+bicus.addEventListener("submit",
+    function (e){
+        e.preventDefault();
+        /**
+         * @type {HTMLFormElement}
+         */
+        const val = e.target;
+ 
+ 
+        /**
+         * @type {HTMLInputElement}
+         */
+        const nemzetiseg = val.querySelector("#nemzetiseg");
+        /**
+         * @type {string}
+         */
+        const nemzetisegValue = nemzetiseg.value;
+ 
+        /**
+         * @type {HTMLInputElement}
+         */
+        const szerzo1 = val.querySelector("#szerzo1");
+        /**
+         * @type {string}
+         */
+        const szerzo1Value = szerzo1.value;
+ 
+        /**
+         * @type {HTMLInputElement}
+         */
+        const mu1 = val.querySelector("#mu1");
+        /**
+         * @type {string}
+         */
+        const mu1Value = mu1.value;
+ 
+        /**
+         * @type {HTMLInputElement}
+         */
+        const szerzo2 = val.querySelector("#szerzo2");
+        /**
+         * @type {string}
+         */
+        const szerzo2Value = szerzo2.value;
+ 
+        /**
+         * @type {HTMLInputElement}
+         */
+        const mu2 = val.querySelector("#mu2");
+        /**
+         * @type {string}
+         */
+        const mu2Value = mu2.value;
+ 
+        /**
+         * @type {{nationality:string, name1:string, work1:string, name2?:string, work2?:string}}
+         */
+        const obj = {};
+        obj.nationality = nemzetisegValue;
+        obj.name1 = szerzo1Value;
+        obj.work1 = mu1Value;
+        obj.name2 = szerzo2Value;
+        obj.work2 = mu2Value;
+ 
+        const povmat = document.getElementById("matung");
+       
+ 
+        const tr = document.createElement("tr");
+        povmat.appendChild(tr);
+ 
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+ 
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+ 
+        td1.innerText = obj.nationality;
+        /**
+        * @type {HTMLTableCellElement}
+        */
+        td1.addEventListener("click", function (e){
+            const target = e.target;
+            target.classList.add("marked");
+        })
+ 
+        td2.innerText = obj.name1;
+        td3.innerText = obj.work1;
+ 
+        if(obj.name2){
+            td1.rowSpan = "2";
+ 
+            const tr = document.createElement("tr");
+            povmat.appendChild(tr);
+ 
+            const td4 = document.createElement("td");
+            tr.appendChild(td4);
+            td4.innerText = obj.name2;
+ 
+            const td5 = document.createElement("td");
+            tr.appendChild(td5);
+            td5.innerText = obj.work2;
+    }
 })
-    
-
-

@@ -85,3 +85,34 @@ for(const obj of arr){
         td5.innerText = obj.work2;
     }
 }
+/**
+ * @type{HTMLFormElement}
+ */
+const form = document.getElementById("htmlform")
+form.addEventListener("submit",function(e){
+    e.preventDefault()
+    /**
+     * @type{HTMLFormElement}
+     */
+    const target = e.target;
+
+    const nemzet = target.querySelector("nemzetiseg")
+    const szerzo1 = target.querySelector("szerzo")
+    const mu1 = target.querySelector("mu1")
+    const szerzo2 = target.querySelector("szerzo2")
+    const mu2 = target.querySelector("mu2")
+
+    const nemzetvalue = nemzet.value
+    const szerzovalue = szerzo1.value
+    const mu1value = mu1.value
+    const szerzo2value = szerzo2.value
+    const mu2value = mu2.value
+
+    /**
+     * @type {{nationality:string, name1:string, work1:string, name2?:string, work2?:string}}
+     */
+    const obj = []
+})
+    
+
+

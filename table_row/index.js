@@ -86,9 +86,8 @@ for(const obj of arr){
     }
 }
  
- 
-//Form
- 
+//form
+
 /**
  * @type {HTMLFormElement}
  */
@@ -157,7 +156,7 @@ bicus.addEventListener("submit",
         obj.name2 = szerzo2Value;
         obj.work2 = mu2Value;
  
-        const povmat = document.getElementById("matung");
+        const povmat = document.getElementById("tbody_t");
        
  
         const tr = document.createElement("tr");

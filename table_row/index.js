@@ -198,3 +198,4 @@ bicus.addEventListener("submit",
             td5.innerText = obj.work2;
     }
 })
+

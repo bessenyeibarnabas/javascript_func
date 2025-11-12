@@ -45,7 +45,7 @@ for(const item of tomb){
 }
  
 const tbody = document.createElement("tbody");
-tbody.id = "tbody_t"
+tbody.id = "tbody_t";
 table.appendChild(tbody);
 /*
 for(const obj of arr){
@@ -94,60 +94,10 @@ for(const obj of arr){
 //table készítése
 
 /**
- * @param {{nationality:string, name1:string, work1:string, name2?:string, work2?:string}[]}
- */
-
-function renderTableBody(data) {
-    const tbody = document.getElementById("tbody_t")
-    tbody.innerHTML = ""
-
-    for (const obj of data){
-        const tr = document.createElement("tr");
-        tbody.appendChild(tr);
-
-        const td1 = document.createElement("td");
-        const td2 = document.createElement("td");
-        const td3 = document.createElement("td");
-    
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-
-        td1.innerText = obj.nationality;
-
-        td1.addEventListener("click", function (e){
-        const target = e.target;
-        target.classList.add("marked");
-        });
-
-        td2.innerText = obj.name1;
-        td3.innerText = obj.work1;
-
-        if(obj.name2){
-            td1.rowSpan = "2";
-    
-            const tr = document.createElement("tr");
-            tbody.appendChild(tr);
-    
-            const td4 = document.createElement("td");
-            tr.appendChild(td4);
-            td4.innerText = obj.name2;
-    
-            const td5 = document.createElement("td");
-            tr.appendChild(td5);
-            td5.innerText = obj.work2;
-        }
-
-    }
-}
-renderTableBody(arr)
-
- 
-//form
-
-/**
  * @type {HTMLFormElement}
  */
+
+
 const bicus = document.getElementById("htmlform");
 bicus.addEventListener("submit",
     function (e){
@@ -222,4 +172,121 @@ bicus.addEventListener("submit",
         arr.push(obj)
         renderTableBody(arr)
     });
+/**
+ * @param {{nationality:string, name1:string, work1:string, name2?:string, work2?:string}[]}
+ */
+
+function renderTableBody(data) {
+    const tbody = document.getElementById("tbody_t")
+    tbody.innerHTML = ""
+
+    for (const obj of data){
+        const tr = document.createElement("tr");
+        tbody.appendChild(tr);
+
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+    
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+
+        td1.innerText = obj.nationality;
+
+        td1.addEventListener("click", function (e){
+        const target = e.target;
+        target.classList.add("marked");
+        });
+
+        td2.innerText = obj.name1;
+        td3.innerText = obj.work1;
+
+        if(obj.name2){
+            td1.rowSpan = "2";
+    
+            const tr = document.createElement("tr");
+            tbody.appendChild(tr);
+    
+            const td4 = document.createElement("td");
+            tr.appendChild(td4);
+            td4.innerText = obj.name2;
+    
+            const td5 = document.createElement("td");
+            tr.appendChild(td5);
+            td5.innerText = obj.work2;
+        }
+
+    }
+}
+renderTableBody(arr)
+
+ 
+//form
+
+
+
+
+/**
+ * 
+ * @param {HTMLFormElement} form
+ * @param {string} labelText
+ * @param {string} id
+ */
+
+function createElement(form, labelText, id){
+    const label = document.createElement("label")
+    label.htmlFor = id
+    label.innerText = labelText
+
+    const input = document.createElement("input")
+    input.type ="text"
+    input.id = id
+    input.name = id
+
+    form.appendChild(label)
+    form.appendChild(document.createElement("br"))
+    form.appendChild(input)
+    form.appendChild(document.createElement("br"))
+    form.appendChild(document.createElement("br"))
+}
+
+
+const src_f = document.createElement("form")
+src_f.id = "src_f"
+document.body.appendChild(src_f)
+
+createElement(src_f, "Nemzetiség", "nemzetiseg")
+createElement(src_f, "Szerző 1", "szerzo1")
+createElement(src_f, "Mű 1", "mu1")
+createElement(src_f, "Szerző 2", "szerzo2")
+createElement(src_f, "Mű 2", "mu2")
+
+const button = document.createElement("button")
+button.innerText = "hozzáadás"
+src_f.appendChild(button)
         
+src_f.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const nemzetiseg = src_f.querySelector("#nemzetiseg").value
+    const szerzo1 = src_f.querySelector("#szerzo1").value
+    const mu1 = src_f.querySelector("#mu1").value
+    const szerzo2 = src_f.querySelector("#szerzo2").value
+    const mu2 = src_f.querySelector("#mu2").value
+
+    const obj = {
+        nationality: nemzetiseg,
+        name1: szerzo1,
+        work1: mu1
+    };
+
+    if (szerzo2 && mu2) {
+        obj.name2 = szerzo2;
+        obj.work2 = mu2
+    }
+
+    arr.push(obj)
+    renderTableBody(arr)
+})
+

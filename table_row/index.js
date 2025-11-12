@@ -45,7 +45,9 @@ for(const item of tomb){
 }
  
 const tbody = document.createElement("tbody");
+tbody.id = "tbody_t"
 table.appendChild(tbody);
+/*
 for(const obj of arr){
     const tr = document.createElement("tr");
     tbody.appendChild(tr);
@@ -62,6 +64,8 @@ for(const obj of arr){
     /**
      * @type {HTMLTableCellElement}
      */
+
+    /*
     td1.addEventListener("click", function (e){
         const target = e.target;
         target.classList.add("marked");
@@ -84,7 +88,60 @@ for(const obj of arr){
         tr.appendChild(td5);
         td5.innerText = obj.work2;
     }
+}*/
+
+
+//table készítése
+
+/**
+ * @param {{nationality:string, name1:string, work1:string, name2?:string, work2?:string}[]}
+ */
+
+function renderTableBody(data) {
+    const tbody = document.getElementById("tbody_t")
+    tbody.innerHTML = ""
+
+    for (const obj of data){
+        const tr = document.createElement("tr");
+        tbody.appendChild(tr);
+
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        const td3 = document.createElement("td");
+    
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+
+        td1.innerText = obj.nationality;
+
+        td1.addEventListener("click", function (e){
+        const target = e.target;
+        target.classList.add("marked");
+        });
+
+        td2.innerText = obj.name1;
+        td3.innerText = obj.work1;
+
+        if(obj.name2){
+            td1.rowSpan = "2";
+    
+            const tr = document.createElement("tr");
+            tbody.appendChild(tr);
+    
+            const td4 = document.createElement("td");
+            tr.appendChild(td4);
+            td4.innerText = obj.name2;
+    
+            const td5 = document.createElement("td");
+            tr.appendChild(td5);
+            td5.innerText = obj.work2;
+        }
+
+    }
 }
+renderTableBody(arr)
+
  
 //form
 
@@ -155,46 +212,14 @@ bicus.addEventListener("submit",
         obj.work1 = mu1Value;
         obj.name2 = szerzo2Value;
         obj.work2 = mu2Value;
- 
+
+ /*
         const povmat = document.getElementById("tbody_t");
-       
- 
+
         const tr = document.createElement("tr");
         povmat.appendChild(tr);
- 
-        const td1 = document.createElement("td");
-        const td2 = document.createElement("td");
-        const td3 = document.createElement("td");
- 
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
- 
-        td1.innerText = obj.nationality;
-        /**
-        * @type {HTMLTableCellElement}
-        */
-        td1.addEventListener("click", function (e){
-            const target = e.target;
-            target.classList.add("marked");
-        })
- 
-        td2.innerText = obj.name1;
-        td3.innerText = obj.work1;
- 
-        if(obj.name2){
-            td1.rowSpan = "2";
- 
-            const tr = document.createElement("tr");
-            povmat.appendChild(tr);
- 
-            const td4 = document.createElement("td");
-            tr.appendChild(td4);
-            td4.innerText = obj.name2;
- 
-            const td5 = document.createElement("td");
-            tr.appendChild(td5);
-            td5.innerText = obj.work2;
-    }
-})
-
+*/
+        arr.push(obj)
+        renderTableBody(arr)
+    });
+        

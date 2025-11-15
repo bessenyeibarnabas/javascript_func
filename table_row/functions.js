@@ -25,15 +25,14 @@ function createField(form, id, labelText) {
     label.innerText = labelText;
     div.appendChild(label);
     form.appendChild(document.createElement("br"));
- 
+    div.appendChild(document.createElement("br"));
+
     const input = document.createElement("input");
     input.type = "text";
     input.id = id;
     input.name = id;
+
     div.appendChild(input);
-    form.appendChild(document.createElement("br"));
-    form.appendChild(document.createElement("br"));
- 
     form.appendChild(div);
  
     const span = document.createElement("span");
@@ -114,6 +113,7 @@ function createTableCell(cellType, cellContent, parentRow){
  * @param {HTMLElement} table
  * @param {string[]} headerList
  */
+
 function generateHeader(table, headerList){
     const thead = document.createElement("thead");
     const tr = document.createElement("tr");

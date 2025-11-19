@@ -1,6 +1,29 @@
+/**
+ * @typedef {{id: string, label: string}} FormField
+ */
 
+//global obj:
+const globalObj = {
+    /**
+     * @type {string[]}
+     */
+    headerTomb : ["Nemzetiség", "szerző", "Mű"],
 
+    /**
+     * @type {FormField[]}
+     */
+    formTomb : [
+        {id : "nemzetiseg", label : "Nemzetiség"},
+        {id : "szerzo1", label : "Szerző"},
+        {id : "mu1", label : "Mű"},
+        {id : "szerzo2", label : "Szerző"},
+        {id : "mu2", label : "Mű"},
+    ]
+}
 
+/**
+ * @type {CountryWriters[]}
+ */
 const arr = [
     {
         nationality: "Orosz",
@@ -27,17 +50,12 @@ const arr = [
         work1: 'A fizikusok',
     }
 ]
- 
-const table = document.createElement("table")
-document.body.appendChild(table)
- 
-const tomb = ["Nemzetiség", "Szerző", "Mű"]
- 
-generateHeader(table, tomb)
- 
-const tbody = document.createElement("tbody")
-tbody.id = "tbody"
-table.appendChild(tbody)
+
+/**
+ * @type {string[]}
+ */
+generateTable(globalObj.headerTomb, "tbody")
+
 
 renderTableBody(arr);
  
@@ -48,27 +66,14 @@ renderTableBody(arr);
  * @type {HTMLFormElement}
  */
 const bicus = document.getElementById("htmlform");
-bicus.addEventListener("submit", htmlEvenListener)
+bicus.addEventListener("submit", htmlEventListener)
  
  
 //js Form
  
-
+const js_form = createForm("js_form", globalObj.formTomb)
  
-const form = document.createElement("form")
-form.id = "js_form"
- 
-createField(form, "nemzetiseg", "Nemzetiség:")
-createField(form, "szerzo1", "Szerző:")
-createField(form, "mu1", "Mű:")
-createField(form, "szerzo2", "Másik szerző:")
-createField(form, "mu2", "Mű:")
- 
-const button = document.createElement("button")
-button.innerText = "Hozzáadás_js"
-form.appendChild(button)
- 
-document.body.appendChild(form)
+document.body.appendChild(js_form)
  
 js_form.addEventListener("submit",
     function (e){
@@ -124,19 +129,52 @@ js_form.addEventListener("submit",
          * @type {string}
          */
         const mu2Value = mu2.value;
- 
-        /**
-         * @type {CountryWriters}
-         */
-        const obj = {}
-        obj.nationality = nemzetisegValue
-        obj.name1 = szerzo1Value
-        obj.work1 = mu1Value
-        obj.name2 = szerzo2Value
-        obj.work2 = mu2Value
- 
-        arr.push(obj);
-        renderTableBody(arr)
+
+        if(validateFields(nemzetiseg, szerzo1, mu1, "js_form")){
+            /**
+             * @type {string}
+             */
+            const nemzetisegValue = nemzetiseg.value;
+            /**
+             * @type {string}
+             */
+            const szerzo1Value = szerzo1.value;
+            /**
+             * @type {string}
+             */
+            const mu1Value = mu1.value;
+            /**
+             * @type {string}
+             */
+            const szerzo2Value = szerzo2.value;
+            /**
+             * @type {string}
+             */
+            const mu2Value = mu2.value
+
+
+            /**
+             * @type {CountryWriters}
+             */
+            const obj = {};
+            obj.nationality = nemzetisegValue;
+            obj.name1 = szerzo1Value;
+            obj.work1 = mu1Value;
+            obj.name2 = szerzo2Value !== "" ? szerzo2Value : undefined;
+            obj.work2 = mu2Value !== "" ? mu2Value : undefined;
+
+            arr.push(obj);
+            renderTableBody(arr)
+
+            js_form.reset()
+
+        }
+
+        for (const item of arr){
+            console.log(item.nationality, item.name1, item.work1, item.name2, item.work2)
+        }
+
+
     }
 )
 

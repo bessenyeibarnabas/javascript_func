@@ -1,0 +1,2 @@
+A puska csak beépített fgvket lehet írni.
+!

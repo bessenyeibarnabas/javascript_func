@@ -24,7 +24,7 @@
     </label>
 
     <!--html table-->
-    <div id="htmlsection">
+    <div id="htmlsection" class="hide">
         <table>
             <thead>
                 <tr>
@@ -33,7 +33,7 @@
                     <th colspan="2">Példa</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="htmlbody">
                 <tr>
                     <td>Athén</td>
                     <td>politika</td>
@@ -63,7 +63,40 @@
                 </tr>
             </tbody>
         </table>
+
+        <!--html form-->
+        <form action="" id="htmlform">
+            <div>
+                <label for="elso">Ókori település</label><br>
+                <input type="text" id="elso" name="telepules"><br>
+                <span class="error"></span>
+            </div>
+
+            <div>
+                <label for="masodik">Ágazat</label><br>
+                <input type="text" id="masodik" name="agazat"><br>
+                <span class="error"></span>
+            </div>
+
+            <div>
+                <label for="harmadik">Példa1</label><br>
+                <input type="text" id="harmadik" name="pelda"><br>
+                <span class="error"></span>
+            </div>
+
+            <div>
+                <label for="negyedik">Példa2</label><br>
+                <input type="text" id="negyedik" name="pelda2"><br>
+                <span class="error"></span>
+            </div>
+
+            <!--gomb-->
+            <div><br>
+                <button type="submit">Hozzáad_HTML</button><br>
+            </div><br>
+        </form>
     </div>
+
 
     <!--Js table-->
     <div id="jssection"></div>

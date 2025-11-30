@@ -1,5 +1,6 @@
 /**
  * @type {{telepules: string, agazat: string, pelda: string, agazat2?: string, pelda2?: string}[]}
+ * Js table adatainak tárolása.
  */
 const arr = [
     {
@@ -28,6 +29,10 @@ const jsDiv = document.getElementById("jssection")
 const table = document.createElement("table")
 jsDiv.appendChild(table)
 
+/**
+ * @type {string}
+ * arr
+ */
 const fejlec = ["Ókori település", "Ágazat", "Példa"]
 
 const thead = document.createElement("thead")
@@ -186,6 +191,10 @@ htmlform.addEventListener("submit", function (e){
     const pelda2 = form.querySelector("#negyedik")
 
     let valid = true;
+    /**
+     * @type {string}
+     * arr
+     */
     const fields = [telepules, agazat, pelda];
 
     for (const input of fields) {

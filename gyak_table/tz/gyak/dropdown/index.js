@@ -2,42 +2,44 @@ const arr = [
     {
         telepules: "Athén",
         agazat: "politika",
-        pelda: "demokrácia",
+        pelda1: "demokrácia",
     },
 
     {
         telepules: "Athén",
         agazat: "tudomány",
-        pelda: "filozófia",
+        pelda1: "filozófia",
     },
 
     {
         telepules: "Egyiptom",
         agazat: "mezőgazdaság",
-        pelda: "csatornák",
+        pelda1: "csatornák",
         pelda2: "gátak",
     },
 
     {
         telepules: "Spárta",
         agazat: "neveléstudomány",
-        pelda: "agogé",
+        pelda1: "agogé",
     },
 
     {
         telepules: "Spárta",
         agazat: "harcászat",
-        pelda: "hoplita",
+        pelda1: "hoplita",
         pelda2: "phalanx",
     },
+
 ]
+
+//-------------------------------------------------------------------------table js
+
 
 const jsDiv = document.getElementById("jssection")
 
 const table = document.createElement("table")
 jsDiv.appendChild(table)
-
-const fejlec = ["Ókori település", "Ágazat", "Példa"]
 
 const thead = document.createElement("thead")
 table.appendChild(thead)
@@ -45,94 +47,97 @@ table.appendChild(thead)
 const tr = document.createElement("tr")
 thead.appendChild(tr)
 
-for (item of fejlec){
+const fejlec = ["Ókori település", "Ágazat", "Példa"]
+for (const f of fejlec){
     const th = document.createElement("th")
     tr.appendChild(th)
-    th.innerText = item
+    th.innerText = f
 
-    if(item === "Példa"){
-        th.colSpan=2
+    if(f === "Példa"){
+        th.colSpan = "2"
     }
 }
 
 const tbody = document.createElement("tbody")
 table.appendChild(tbody)
 
-for (const data of arr){
+for (const item of arr){
     const tr = document.createElement("tr")
     tbody.appendChild(tr)
 
     const td1 = document.createElement("td")
     tr.appendChild(td1)
-    td1.innerText = data.telepules
+    td1.innerText = item.telepules
 
     const td2 = document.createElement("td")
     tr.appendChild(td2)
-    td2.innerText = data.agazat
+    td2.innerText = item.agazat
 
     const td3 = document.createElement("td")
     tr.appendChild(td3)
-    td3.innerText = data.pelda
+    td3.innerText = item.pelda1
 
-    if(data.pelda2){
+    if (item.pelda2){
         const td4 = document.createElement("td")
         tr.appendChild(td4)
-        td4.innerText = data.pelda2
+        td4.innerText = item.pelda2
 
     } else{
-        td3.colSpan = "2";
+        td3.colSpan = "2"
     }
+        
+    
 }
 
+//-------------------------------------------------------------------------dropdown
 const selector = document.getElementById("tableselector")
 const htmlDiv = document.getElementById("htmlsection")
 
-function DropChecker(sel, htmlEl, jsEl){
-    if (sel.value === "js"){
-        htmlEl.classList.add("hide")
-        jsEl.classList.remove("hide")
+function DropDownF (seles, htmles, jses){
+    if(seles.value === "js"){
+        htmles.classList.add("hide")
+        jses.classList.remove("hide")
     } else{
-        htmlEl.classList.remove("hide")
-        jsEl.classList.add("hide")
+        htmles.classList.remove("hide")
+        jses.classList.add("hide")
     }
+
 }
-
 selector.addEventListener("change", function(){
-    DropChecker(selector, htmlDiv, jsDiv)
+    DropDownF(selector, htmlDiv, jsDiv)
 })
-DropChecker(selector, htmlDiv, jsDiv);
-
-
-//js form
-function GenerForm (parent, txt, id, inpname){
+DropDownF(selector, htmlDiv, jsDiv)
+//-------------------------------------------------------------------------js form
+function FormGen (parent, txt, id, inputname){
     const div = document.createElement("div")
     parent.appendChild(div)
 
-    BrGenerate(div)
+    BrGen(div)
 
     const label = document.createElement("label")
     div.appendChild(label)
     label.htmlFor = id
     label.innerText = txt
 
-    BrGenerate(div)
+    BrGen(div)
 
     const input = document.createElement("input")
     div.appendChild(input)
     input.type = "text"
     input.id = id
-    input.name = inpname
+    input.name = inputname
 
-    BrGenerate(div)
-    
+    BrGen(div)
+
     const span = document.createElement("span")
     div.appendChild(span)
     span.classList.add("error")
 
-    BrGenerate(div)
+    BrGen(div)
 }
 
-function BrGenerate (parent){
+//sortörés
+function BrGen (parent){
     const br = document.createElement("br")
     parent.appendChild(br)
 }
@@ -141,19 +146,14 @@ const form = document.createElement("form")
 jsDiv.appendChild(form)
 form.id = "jsform"
 
-GenerForm(form,"Ókori település", "elso", "telepules")
-GenerForm(form,"Ágazat", "masodik", "agazat")
-GenerForm(form,"Példa", "harmadik", "pelda")
-GenerForm(form,"Példa2", "negyedik", "pelda2")
+FormGen(form, "Ókori település", "elso", "telepules")
+FormGen(form, "Ágazat", "masodik", "agazat")
+FormGen(form, "Pélad1", "harmadik", "pelda1")
+FormGen(form, "Pélad2", "negyedik", "pelda2")
+
+//js button
 
 const button = document.createElement("input")
 form.appendChild(button)
 button.type = "submit"
 button.value = "Hozzáad js"
-
-
-
-
-
-
-const htmlform = document.getElementById("htmlform")

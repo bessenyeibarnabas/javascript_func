@@ -30,7 +30,7 @@ const table = document.createElement("table")
 jsDiv.appendChild(table)
 
 /**
- * @type {string}
+ * @type {string[]}
  * arr
  */
 const fejlec = ["Ókori település", "Ágazat", "Példa"]
@@ -84,26 +84,31 @@ for (const item of arr){
 }
 
 /**
- * @type {HTMLInputElement}
+ * 
+ * @param {HTMLInputElement} checkboxEs
+ * @param {HTMLElement} htmlDivEs
+ * @param {HTMLElement} jsDivEs
+ * @returns {void}
  */
-const checkbox = document.getElementById("tableselector")
-/**
- * @type {HTMLInputElement}
- */
-const htmlDiv = document.getElementById("htmlsection")
-
-function CheckboxChange(){
-    if (checkbox.checked) {
-        htmlDiv.classList.add("hide")
-        jsDiv.classList.remove("hide")
+function CheckboxChange(checkboxEs, htmlDivEs, jsDivEs){
+    if (checkboxEs.checked){
+        htmlDivEs.classList.add("hide")
+        jsDivEs.classList.remove("hide")
     } else {
-        jsDiv.classList.add("hide")
-        htmlDiv.classList.remove("hide")
+        jsDivEs.classList.add("hide")
+        htmlDivEs.classList.remove("hide")
     }
 }
 
-checkbox.addEventListener("change", CheckboxChange)
-CheckboxChange();
+const checkbox = document.getElementById("tableselector")
+const htmlDiv = document.getElementById("htmlsection")
+
+checkbox.addEventListener("change", function(){
+    CheckboxChange(checkbox, htmlDiv, jsDiv)
+})
+
+CheckboxChange(checkbox, htmlDiv, jsDiv);
+
 
 
 //js form
@@ -190,9 +195,12 @@ htmlform.addEventListener("submit", function (e){
     /** @type {HTMLFormElement} */
     const pelda2 = form.querySelector("#negyedik")
 
+    /**
+     * @type {boolean}
+     */
     let valid = true;
     /**
-     * @type {string}
+     * @type {string[]}
      * arr
      */
     const fields = [telepules, agazat, pelda];

@@ -78,7 +78,13 @@ for (const item of arr){
     }
 }
 
+/**
+ * @type {HTMLInputElement}
+ */
 const checkbox = document.getElementById("tableselector")
+/**
+ * @type {HTMLInputElement}
+ */
 const htmlDiv = document.getElementById("htmlsection")
 
 function CheckboxChange(){
@@ -97,6 +103,14 @@ CheckboxChange();
 
 //js form
 
+/**
+ * 
+ * @param {HTMLElement} parent 
+ * @param {string} txt 
+ * @param {string} id 
+ * @param {string} inputname 
+ * @returns {void}
+ */
 function generateForm (parent, txt, id, inputname){
     const div = document.createElement("div")
     parent.appendChild(div)
@@ -125,6 +139,10 @@ function generateForm (parent, txt, id, inputname){
 }
 
 //sortörés
+/**
+ * 
+ * @param {HTMLElement} parent 
+ */
 function generateBr (parent){
     const br = document.createElement("br")
     parent.appendChild(br)
@@ -148,6 +166,7 @@ submit.type="submit"
 submit.value="Hozzáad_js"
 
 
+
 //html table-hez add adatot
 const htmlform = document.getElementById("htmlform")
 
@@ -157,9 +176,13 @@ htmlform.addEventListener("submit", function (e){
     const form = e.target
 
     //input id lekérés
+    /** @type {HTMLFormElement} */
     const telepules = form.querySelector("#elso")
+    /** @type {HTMLFormElement} */
     const agazat = form.querySelector("#masodik")
+    /** @type {HTMLFormElement} */
     const pelda = form.querySelector("#harmadik")
+    /** @type {HTMLFormElement} */
     const pelda2 = form.querySelector("#negyedik")
 
     let valid = true;
@@ -179,6 +202,9 @@ htmlform.addEventListener("submit", function (e){
     if (!valid) return;
 
     //obj érték
+    /**
+     * @type {{telepules:string, agazat:string, pelda:string, pelda2?:string}}
+     */
     const obj = {
         telepules: telepules.value,
         agazat: agazat.value,
@@ -215,3 +241,95 @@ htmlform.addEventListener("submit", function (e){
 })
 
 //js validáció
+const jsform = document.getElementById("jsform")
+jsform.addEventListener("submit", function (event){
+    event.preventDefault();
+
+    const j_form = event.target
+
+    //input js id
+    const telepules1 = j_form.querySelector("#elso")
+    const agazat1 = j_form.querySelector("#masodik")
+    const pelda1 = j_form.querySelector("#harmadik")
+    const agazat2 = j_form.querySelector("#negyedik")
+    const pelda2 = j_form.querySelector("#otodik")
+
+    let val = true
+    const field = [telepules1, agazat1, pelda1]
+
+for (const inp of field){
+    const div = inp.parentElement;
+    const span = div.querySelector("span");
+    if (inp.value === ""){
+        span.classList.remove("hide");
+        span.classList.add("error");
+        span.innerText = "A mező kitöltése kötelező";
+        val = false;
+    } else {
+        span.classList.remove("error");
+        span.classList.add("hide");
+        span.innerText = "";
+    }
+}
+
+
+
+    if (!val) return;
+
+    /**
+     * @type {{telepules1:string, agazat1:string, pelda1:string, agazat2?:string, pelda2?:string}}
+     */
+    const ertek_obj = {
+        telepules1: telepules1.value,
+        agazat1: agazat1.value,
+        pelda1: pelda1.value,
+        agazat2: agazat2.value === "" ? undefined:agazat2.value,
+        pelda2: pelda2.value === "" ? undefined:pelda2.value,
+    }
+
+    const jstbody = document.getElementById("jstbody")
+
+    // első sor
+    const tr1 = document.createElement("tr")
+    jstbody.appendChild(tr1)
+
+    const td1 = document.createElement("td")
+    td1.innerText = ertek_obj.telepules1
+    tr1.appendChild(td1)
+
+    const td2 = document.createElement("td")
+    td2.innerText = ertek_obj.agazat1
+    tr1.appendChild(td2)
+
+    const td3 = document.createElement("td")
+    td3.innerText = ertek_obj.pelda1
+    tr1.appendChild(td3)
+
+    // ha van pelda2 akkor pelda1 cella colspan=2
+    if (ertek_obj.pelda2) {
+        td3.colSpan = 2
+    }
+
+    // ha van agazat2 vagy pelda2 akkor kell td1-re rowspan
+    if (ertek_obj.agazat2 || ertek_obj.pelda2) {
+        td1.rowSpan = "2"
+
+        //második sor ha van extra tartalom
+        const tr2 = document.createElement("tr")
+        jstbody.appendChild(tr2)
+
+        if (ertek_obj.agazat2) {
+            const td4 = document.createElement("td")
+            td4.innerText = ertek_obj.agazat2
+            tr2.appendChild(td4)
+        }
+
+        if (ertek_obj.pelda2) {
+            const td5 = document.createElement("td")
+            td5.innerText = ertek_obj.pelda2
+            tr2.appendChild(td5)
+        }
+    }
+
+    jsform.reset();
+})

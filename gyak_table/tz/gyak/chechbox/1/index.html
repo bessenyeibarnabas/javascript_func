@@ -16,11 +16,12 @@
         }
     </style>
 </head>
-<body>
 
-    <label for="">
-        <input type="checkbox" name="" id="tableselector"> js table <br>
-    </label><br>
+    <label for=""> js table
+        <input type="checkbox" name="" id="tableselector">
+    </label>
+
+<body>
 
     <div id="htmlsection" class="hide">
         <table>
@@ -31,7 +32,7 @@
                     <th colspan="2">Példa</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="htmlbody">
                 <tr>
                     <td>Athén</td>
                     <td>politika</td>
@@ -60,41 +61,41 @@
                     <td>phalanx</td>
                 </tr>
             </tbody>
-        </table><br>
+        </table>
 
-        <!--html form-->
         <form action="" id="htmlform">
-            <div>
+            <div><br>
                 <label for="elso">Ókori település</label><br>
-                <input type="text" name="telepules" id="elso"><br>
-                <span class="error"></span>
-            </div>
-
-            <div>
-                <label for="masodik">Ágazat</label><br>
-                <input type="text" name="agazat1" id="masodik"><br>
-                <span class="error"></span>
-            </div>
-
-            <div>
-                <label for="harmadik">Példa1</label><br>
-                <input type="text" name="pelda1" id="harmadik"><br>
-                <span class="error"></span>
-            </div>
-
-            <div>
-                <label for="negyedik">Példa2</label><br>
-                <input type="text" name="pelda2" id="negyedik"><br>
+                <input type="text" name="telepules" id="elso">
                 <span class="error"></span>
             </div>
 
             <div><br>
-                <button type="submit">Hozzáad_HTML</button>
+                <label for="masodik">Ágazat</label><br>
+                <input type="text" name="agazat" id="masodik">
+                <span class="error"></span>
+            </div>
+
+            <div><br>
+                <label for="harmadik">Példa1</label><br>
+                <input type="text" name="pelda1" id="harmadik">
+                <span class="error"></span>
+            </div>
+
+            <div><br>
+                <label for="negyedik">Példa2</label><br>
+                <input type="text" name="pelda2" id="negyedik">
+                <span class="error"></span>
+            </div>
+
+            <div><br>
+                <button type="submit">Hozzáad html</button>
             </div>
         </form>
     </div>
-    
+
     <div id="jssection" class="hide"></div>
+    
 
     <script src="index.js"></script>
 </body>

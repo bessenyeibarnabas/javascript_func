@@ -2,8 +2,8 @@ const arr = [
     {
         telepules: "Athén",
         agazat: "politika",
-        agazat2: "tudomány",
-        pelda: "demokrácia",
+        pelda: "demokracia",
+        agazat2: "tudomany",
         pelda2: "filozófia",
     },
 
@@ -16,18 +16,20 @@ const arr = [
     {
         telepules: "Spárta",
         agazat: "neveléstudomány",
-        agazat2: "harcászat",
         pelda: "agogé",
+        agazat2: "harcászat",
         pelda2: "hoplita",
     },
 ]
+/**
+ * const  = document.createElement("")
+.appendChild()
+ */
 
 const jsDiv = document.getElementById("jssection")
 
 const table = document.createElement("table")
 jsDiv.appendChild(table)
-
-fejlec = ["Ókori település", "Ágazat", "Példa"]
 
 const thead = document.createElement("thead")
 table.appendChild(thead)
@@ -35,110 +37,214 @@ table.appendChild(thead)
 const tr = document.createElement("tr")
 thead.appendChild(tr)
 
-for (const adat of fejlec){
+const fejlec = ["Ókori település", "Ágazat", "Példa"]
+for (const f of fejlec){
     const th = document.createElement("th")
     tr.appendChild(th)
-    th.innerText = adat
+    th.innerText = f
 }
 
-const tbody = document.createElement("tbody")
-table.appendChild(tbody)
+for (const item of arr){
+    TableAdd(item)
+}
 
-for (const i of arr){
+function TableAdd (obj){
+    const tbody = document.createElement("tbody")
+    table.appendChild(tbody)
+
     const tr = document.createElement("tr")
     tbody.appendChild(tr)
 
     const td1 = document.createElement("td")
     tr.appendChild(td1)
-    td1.innerText = i.telepules
+    td1.innerText = obj.telepules
 
     const td2 = document.createElement("td")
     tr.appendChild(td2)
-    td2.innerText = i.agazat
+    td2.innerText = obj.agazat
 
     const td3 = document.createElement("td")
     tr.appendChild(td3)
-    td3.innerText = i.pelda
+    td3.innerText = obj.pelda
 
-    if (i.agazat2){
+    if (obj.agazat2 || obj.pelda2){
         td1.rowSpan = "2"
 
-        const tr = document.createElement("tr")
-        tbody.appendChild(tr)
+        const tr2 = document.createElement("tr")
+        tbody.appendChild(tr2)
 
         const td4 = document.createElement("td")
-        tr.appendChild(td4)
-        td4.innerText = i.agazat2
+        tr2.appendChild(td4)
+        td4.innerText = obj.agazat2
 
         const td5 = document.createElement("td")
-        tr.appendChild(td5)
-        td5.innerText = i.pelda2
+        tr2.appendChild(td5)
+        td5.innerText = obj.pelda2
     }
 }
 
-//checkbox
-const checkbox = document.getElementById("tableselector")
+//-----------------------------------------------------------------checkbox
+const selector = document.getElementById("tableselector")
 const htmlDiv = document.getElementById("htmlsection")
 
-function CheckboxChange(){
-    if (checkbox.checked){
-        htmlDiv.classList.add("hide")
-        jsDiv.classList.remove("hide")
-    }else{
-        htmlDiv.classList.remove("hide")
-        jsDiv.classList.add("hide")
+function CheckBox (selectores, htmles, jses){
+    if (selectores.checked){
+        htmles.classList.add("hide")
+        jses.classList.remove("hide")
+    } else{
+        htmles.classList.remove("hide")
+        jses.classList.add("hide")
     }
 }
-checkbox.addEventListener("change", CheckboxChange)
-CheckboxChange();
 
+selector.addEventListener("change", function(){
+    CheckBox(selector, htmlDiv, jsDiv)
+})
 
-//js form generator
-function formGenerator (gyujt, txt, id, inpname){
+CheckBox(selector, htmlDiv, jsDiv);
+
+//--------------------------------------js form
+
+function FormCreat (parent, txt, id,inpname){
     const div = document.createElement("div")
-    gyujt.appendChild(div)
+    parent.appendChild(div)
 
-    generatorBr(div)
+    BrG(div)
 
     const label = document.createElement("label")
     div.appendChild(label)
     label.htmlFor = id
     label.innerText = txt
 
-    generatorBr(div)
+    BrG(div)
 
     const input = document.createElement("input")
     div.appendChild(input)
-    input.type = txt
+    input.type = "text"
     input.id = id
     input.name = inpname
 
-    generatorBr(div)
+    BrG(div)
 
     const span = document.createElement("span")
     div.appendChild(span)
     span.classList.add("error")
 
-    generatorBr(div)
-
+    BrG(div)
 }
 
-function generatorBr(gyujt){
+function BrG (parent){
     const br = document.createElement("br")
-    gyujt.appendChild(br)
+    parent.appendChild(br)
 }
 
-const form = document.createElement("form")
-jsDiv.appendChild(form)
-form.id = "jsform"
+const formjs = document.createElement("form")
+jsDiv.appendChild(formjs)
+formjs.id = "jsform"
 
-formGenerator(form,"Ókori település","elso","telepules")
-formGenerator(form,"Ágazat1","masodik","agazat1")
-formGenerator(form,"Példa1","harmadik","pelda1")
-formGenerator(form,"Ágazat2","negyedik","agazat2")
-formGenerator(form,"Példa2","otodik","pelda2")
+FormCreat(formjs, "Ókori település", "elso", "telepules")
+FormCreat(formjs, "Agazats", "masodik", "agazat")
+FormCreat(formjs, "Példa", "harmadik", "pelda")
+FormCreat(formjs, "Agazat2", "negyedik", "agazat2")
+FormCreat(formjs, "Példa2", "otodik", "pelda2")
 
-const submit = document.createElement("input")
-form.appendChild(submit)
-submit.type = "submit"
-submit.value = "hozzáad js"
+const button = document.createElement("input")
+formjs.appendChild(button)
+button.type = "submit"
+button.value = "hozaad"
+
+//---------------------------------------------------közös validáció
+function ValidAl (inputs){
+    let valid = true
+    for (const inp of inputs){
+        const div =  inp.parentElement
+        const span = div.querySelector(".error")
+
+        if (inp.value === ""){
+            span.innerText = "Kötelező"
+            valid = false
+        } else{
+            span.innerText = ""
+        }
+    }
+    return valid
+}
+
+//-------------------------------------------------hozzáad js
+formjs.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const telepules = formjs.querySelector("#elso")
+    const agazat = formjs.querySelector("#masodik")
+    const pelda = formjs.querySelector("#harmadik")
+    const agazat2 = formjs.querySelector("#negyedik")
+    const pelda2 = formjs.querySelector("#otodik")
+
+    if(!ValidAl([telepules, agazat, pelda])) return;
+
+    const obj = {
+        telepules: telepules.value,
+        agazat: agazat.value,
+        pelda: pelda.value,
+        agazat2: agazat2.value !== "" ? agazat2.value : undefined,
+        pelda2: pelda2.value !== "" ? pelda2.value : undefined,
+    }
+
+    TableAdd(obj);
+    formjs.reset();
+})
+
+//----------------------------------------------------------hozzáad html + submit
+const htmlform = document.getElementById("htmlform")
+htmlform.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const telepules = htmlform.querySelector("#elso")
+    const agazat = htmlform.querySelector("#masodik")
+    const pelda = htmlform.querySelector("#harmadik")
+    const pelda2 = htmlform.querySelector("#negyedik")
+
+    if(!ValidAl([telepules, agazat, pelda])) return;
+
+    const obj = {
+        telepules: telepules.value,
+        agazat: agazat.value,
+        pelda: pelda.value,
+        pelda2: pelda2.value !== "" ? pelda2.value : undefined,
+    }
+
+    
+
+    const tbody = document.getElementById("htmlbody")
+    const tr = document.createElement("tr")
+    tbody.appendChild(tr)
+
+    const td1 = document.createElement("td")
+    tr.appendChild(td1)
+    td1.innerText = obj.telepules
+
+    const td2 = document.createElement("td")
+    tr.appendChild(td2)
+    td2.innerText = obj.agazat
+
+    const td3 = document.createElement("td")
+    tr.appendChild(td3)
+    td3.innerText = obj.pelda
+
+    if (!obj.pelda2){
+        td3.colSpan = 2
+    } else{
+
+        const td4 = document.createElement("td")
+        tr.appendChild(td4)
+        td4.innerText = obj.pelda2
+    }
+
+    htmlform.reset();
+})
+
+
+    
+
+
+

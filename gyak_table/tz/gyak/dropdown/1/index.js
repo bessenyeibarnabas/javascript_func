@@ -2,30 +2,41 @@ const arr = [
     {
         telepules: "Athén",
         agazat: "politika",
-        pelda: "demokracia",
-        agazat2: "tudomany",
-        pelda2: "filozófia",
+        pelda: "demokrácia",
+    },
+
+    {
+        telepules: "Athén",
+        agazat: "tudomány",
+        pelda: "filozófia",
     },
 
     {
         telepules: "Egyiptom",
         agazat: "mezőgazdaság",
         pelda: "csatornák",
+        pelda2: "gátak",
     },
 
     {
         telepules: "Spárta",
         agazat: "neveléstudomány",
         pelda: "agogé",
-        agazat2: "harcászat",
-        pelda2: "hoplita",
     },
+
+    {
+        telepules: "Spárta",
+        agazat: "harcászat",
+        pelda: "hoplita",
+        pelda2: "phalanx",
+    },
+
 ]
 
-const divJs = document.getElementById("jssection")
+const jsDiv = document.getElementById("jssection")
 
 const table = document.createElement("table")
-divJs.appendChild(table)
+jsDiv.appendChild(table)
 
 const thead = document.createElement("thead")
 table.appendChild(thead)
@@ -38,121 +49,120 @@ for (const f of fejlec){
     const th = document.createElement("th")
     tr.appendChild(th)
     th.innerText = f
+
+    if(f === "Példa"){
+        th.colSpan = "2"
+    }
 }
+
 
 for (const item of arr){
-    AddtoJsTable(item)
+    TableAdd(item)
 }
 
-function AddtoJsTable (obj){
+
+function TableAdd (obj){
     const tbody = document.createElement("tbody")
     table.appendChild(tbody)
 
-    const tr1 = document.createElement("tr")
-    tbody.appendChild(tr1)
+    const tr = document.createElement("tr")
+    tbody.appendChild(tr)
 
     const td1 = document.createElement("td")
-    tr1.appendChild(td1)
+    tr.appendChild(td1)
     td1.innerText = obj.telepules
 
     const td2 = document.createElement("td")
-    tr1.appendChild(td2)
+    tr.appendChild(td2)
     td2.innerText = obj.agazat
 
     const td3 = document.createElement("td")
-    tr1.appendChild(td3)
+    tr.appendChild(td3)
     td3.innerText = obj.pelda
 
-    if (obj.agazat2 || obj.pelda2){
-
-        td1.rowSpan = "2"
-
-        const tr2 = document.createElement("tr")
-        tbody.appendChild(tr2)
-
+    if (obj.pelda2){
         const td4 = document.createElement("td")
-        tr2.appendChild(td4)
-        td4.innerText = obj.agazat2
+        tr.appendChild(td4)
+        td4.innerText = obj.pelda2
 
-        const td5 = document.createElement("td")
-        tr2.appendChild(td5)
-        td5.innerText = obj.pelda2
-    }
+    }else{
+        td3.colSpan = "2"
+        }
 }
 
-//-------------------------------------------------------------------CHECKBOX
-const checkbox = document.getElementById("tableselector")
-const divHtml = document.getElementById("htmlsection")
 
-function CheckGen (checkboxos, divHtmles, divJses){
-    if (checkboxos.checked){
-        divHtmles.classList.add("hide")
-        divJses.classList.remove("hide")
+//-------------------------------------menu
+const selector = document.getElementById("tableselector")
+const htmlDiv = document.getElementById("htmlsection")
+
+function DropDown (selectes, htmles, jses) {
+    if(selectes.value === "js"){
+        htmles.classList.add("hide")
+        jses.classList.remove("hide")
     } else{
-        divHtmles.classList.remove("hide")
-        divJses.classList.add("hide")
+        htmles.classList.remove("hide")
+        jses.classList.add("hide")
     }
 }
 
-checkbox.addEventListener("change", function (){
-    CheckGen(checkbox, divHtml, divJs)
+selector.addEventListener("change", function(){
+    DropDown(selector, htmlDiv, jsDiv)
 })
+DropDown(selector, htmlDiv, jsDiv);
 
-CheckGen(checkbox, divHtml, divJs);
-
-//-------------------------------------------------------------------JS FORM
-
-function GenForm (parent, id, txt, inpname){
+//-------------------------------------jsform
+function FormGener (parent, txt, id, inpname){
     const div = document.createElement("div")
     parent.appendChild(div)
 
-    BrGen(div)
+    BrGener(div)
 
     const label = document.createElement("label")
     div.appendChild(label)
     label.htmlFor = id
     label.innerText = txt
 
-    BrGen(div)
+    BrGener(div)
 
     const input = document.createElement("input")
     div.appendChild(input)
     input.type = "text"
-    input.id = id
     input.name = inpname
+    input.id = id
 
-    BrGen(div)
+    BrGener(div)
 
     const span = document.createElement("span")
     div.appendChild(span)
     span.classList.add("error")
 
-    BrGen(div)
+    BrGener(div)
 }
 
-function BrGen (parent){
+function BrGener (parent){
     const br = document.createElement("br")
     parent.appendChild(br)
 }
 
-const form = document.createElement("form")
-divJs.appendChild(form)
-form.id = "jsform"
+const formjs = document.createElement("form")
+jsDiv.appendChild(formjs)
+formjs.id = "jsform"
 
-GenForm(form, "elso", "Ókori település", "telepules")
-GenForm(form, "masodik", "Ágazats", "agazat")
-GenForm(form, "harmadik", "Példa1", "pelda")
-GenForm(form, "negyedik", "Ágazat2", "agazat2")
-GenForm(form, "otodik", "Példa2", "pelda2")
+FormGener(formjs, "Ókori település", "elso", "telepules")
+FormGener(formjs, "Agazat", "masodik", "agazat")
+FormGener(formjs, "Pelda1", "harmadik", "pelda")
+FormGener(formjs, "Pelda2", "negyedik", "pelda2")
 
+// js button
 const button = document.createElement("input")
-form.appendChild(button)
+formjs.appendChild(button)
 button.type = "submit"
 button.value = "Hozzáad js"
 
-//-------------------------------------------------------------------közös validácio
-function ValidKozos (inputs){
-    let valid = true
+//-----------------------------------------------közös valid
+function KozosValid(inputs) {
+    let valid = true;
+
     for (const inp of inputs) {
         const div = inp.parentElement;
         const span = div.querySelector(".error");
@@ -165,32 +175,30 @@ function ValidKozos (inputs){
         }
     }
 
-    return valid
+    return valid;
 }
 
-//-------------------------------------------------------------------Js hozzáad
-form.addEventListener("submit", function (e){
+
+//----------------------------------------js hozzaad
+formjs.addEventListener("submit", function(e){
     e.preventDefault();
 
-    const telepules = form.querySelector("#elso")
-    const agazat = form.querySelector("#masodik")
-    const pelda = form.querySelector("#harmadik")
-    const agazat2 = form.querySelector("#negyedik")
-    const pelda2 = form.querySelector("#otodik")
+    const telepules = formjs.querySelector("#elso")
+    const agazat = formjs.querySelector("#masodik")
+    const pelda = formjs.querySelector("#harmadik")
+    const pelda2 = formjs.querySelector("#negyedik")
 
-    if (!ValidKozos([telepules, agazat, pelda])) return;
+    if(!KozosValid([telepules, agazat, pelda])) return;
 
     const obj = {
         telepules: telepules.value,
         agazat: agazat.value,
         pelda: pelda.value,
-        agazat2: agazat2.value !== "" ? agazat2.value : undefined,
         pelda2: pelda2.value !== "" ? pelda2.value : undefined,
-    };
+    }
 
-    AddtoJsTable(obj);
-    form.reset();
-    
+    TableAdd(obj);
+    formjs.reset();
 })
 
 //-------------------------------------------------------------------Html table and submit
@@ -201,14 +209,16 @@ htmlForm.addEventListener("submit", function(e){
     const telepules = htmlForm.querySelector("#elso");
     const agazat = htmlForm.querySelector("#masodik");
     const pelda1 = htmlForm.querySelector("#harmadik");
-    const pelda2 = htmlForm.querySelector("#negyedik");
+    const agazat2 = htmlForm.querySelector("#negyedik");
+    const pelda2 = htmlForm.querySelector("#otodik");
 
-    if (!ValidKozos([telepules, agazat, pelda1])) return;
+    if (!KozosValid([telepules, agazat, pelda1])) return;
 
     const obj = {
         telepules: telepules.value,
         agazat: agazat.value,
         pelda1: pelda1.value,
+        agazat2: agazat2.value !== "" ? agazat2.value : undefined,
         pelda2: pelda2.value !== "" ? pelda2.value : undefined,
     };
 
@@ -228,12 +238,19 @@ htmlForm.addEventListener("submit", function(e){
     td3.innerText = obj.pelda1;
     tr.appendChild(td3);
 
-    if (!obj.pelda2) {
-        td3.colSpan = 2;
-    } else {
+    if (obj.agazat2 || obj.pelda2) {
+        td1.rowSpan = 2;
+
+        const tr2 = document.createElement("tr")
+        tbody.appendChild(tr2)
+
         const td4 = document.createElement("td");
-        td4.innerText = obj.pelda2;
-        tr.appendChild(td4);
+        td4.innerText = obj.agazat2;
+        tr2.appendChild(td4);
+
+        const td5 = document.createElement("td");
+        td5.innerText = obj.pelda2;
+        tr2.appendChild(td5);
     }
 
     htmlForm.reset();

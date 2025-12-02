@@ -18,46 +18,45 @@
 </head>
 <body>
 
-    <label for="tableselector">táblázatok
-        <input type="checkbox" name="" id="tableselector">
+    <label for="tableselector">
+        <select name="" id="tableselector">
+            <option value="html" selected>html table</option>
+            <option value="js"> js table</option>
+        </select>
     </label>
 
     <div id="htmlsection" class="hide">
-        <table><br>
-            <thead id="htmlbody">
+        <table>
+            <thead>
                 <tr>
-                    <th>Ókori település</th>
+                    <th rowspan="2">Ókori település</th>
                     <th>Ágazat</th>
-                    <th colspan="2">Példa</th>
+                    <th>Példa</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="htmlbody">
                 <tr>
-                    <td>Athén</td>
+                    <td rowspan="2">Athén</td>
                     <td>politika</td>
-                    <td colspan="2">demokrácia</td>
+                    <td>demokrácia</td>
                 </tr>
                 <tr>
-                    <td>Athén</td>
                     <td>tudomány</td>
-                    <td colspan="2">filozófia</td>
+                    <td>filozófia</td>
                 </tr>
                 <tr>
                     <td>Egyiptom</td>
                     <td>mezőgazdaság</td>
                     <td>csatornák</td>
-                    <td>gátak</td>
                 </tr>
                 <tr>
-                    <td>Spárta</td>
+                    <td rowspan="2">Spárta</td>
                     <td>neveléstudomány</td>
-                    <td colspan="2">agogé</td>
+                    <td>agogé</td>
                 </tr>
                 <tr>
-                    <td>Spárta</td>
                     <td>harcászat</td>
                     <td>hoplita</td>
-                    <td>phalanx</td>
                 </tr>
             </tbody>
         </table>
@@ -82,8 +81,14 @@
             </div>
 
             <div><br>
-                <label for="negyedik">Példa2</label><br>
-                <input type="text" name="pelda2" id="negyedik">
+                <label for="negyedik">Ágazat2</label><br>
+                <input type="text" name="agazat2" id="negyedik">
+                <span class="error"></span>
+            </div>
+
+            <div><br>
+                <label for="otodik">Példa2</label><br>
+                <input type="text" name="pelda2" id="otodik">
                 <span class="error"></span>
             </div>
 
@@ -93,9 +98,9 @@
         </form>
 
     </div>
-    
 
     <div id="jssection" class="hide"></div>
+    
 
     <script src="index.js"></script>
 </body>

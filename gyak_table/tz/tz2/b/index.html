@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ókor Tudomány</title>
+    <style>
+        table,tr,td,th{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 1px;
+        }
+      
+       .hide{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+
+    <label for="tableselector">
+        <select name="" id="tableselector">
+            <option value="html" selected>html table</option>
+            <option value="js">js table</option>
+        </select>
+    </label>
+
+    <div id="htmlsection" class="hide">
+        <table>
+            <thead>
+                <tr>
+                    <th>Ókori település</th>
+                    <th>Ágazat</th>
+                    <th>Példa</th>
+                </tr>
+            </thead>
+            <tbody id="htmltbody">
+                <tr>
+                    <td rowspan="2">Athén</td>
+                    <td>politika</td>
+                    <td>demokrácia</td>
+                </tr>
+                <tr>
+                    <td>tudomány</td>
+                    <td>filozófia</td>
+                </tr>
+                <tr>
+                    <td>Egyiptom</td>
+                    <td>mezőgazdaság</td>
+                    <td>csatornák</td>
+
+                </tr>
+                <tr>
+                    <td rowspan="2">Spárta</td>
+                    <td>neveléstudomány</td>
+                    <td>agogé</td>
+                </tr>
+                <tr>
+                    <td>harcászat</td>
+                    <td>hoplita</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form action="" id="htmlform">
+        <div><br>
+            <label for="elso">Ókori település</label><br>
+            <input type="text" name="telepules" id="elso">
+            <span class="error"></span>
+        </div>
+
+        <div><br>
+            <label for="masodik">Ágazat</label><br>
+            <input type="text" name="agazat" id="masodik">
+            <span class="error"></span>
+        </div>
+
+        <div><br>
+            <label for="harmadik">Példa</label><br>
+            <input type="text" name="pelda" id="harmadik">
+            <span class="error"></span>
+        </div>
+
+        <div><br>
+            <label for="negyedik">Ágazat2</label><br>
+            <input type="text" name="agazat2" id="negyedik">
+            <span class="error"></span>
+        </div>
+
+        <div><br>
+            <label for="otodik">Példa2</label><br>
+            <input type="text" name="pelda2" id="otodik">
+            <span class="error"></span>
+        </div>
+
+        <div><br>
+            <button type="submit">Hozzáad html</button>
+        </div>
+    </form>
+    </div>
+
+
+    <div id="jssection" class="hide"></div>
+    
+    <script src="index.js"></script>
+</body>
+</html>
